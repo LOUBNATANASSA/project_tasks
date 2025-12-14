@@ -62,4 +62,4 @@ This project is built using a modern, decoupled architecture ensuring scalabilit
 ### Step 1: Database Setup
 Create an empty database in MySQL shell or Workbench:
 ```sql
-CREATE DATABASE loubna_db;
+CREATE DATABASE gestion_projet_db;
