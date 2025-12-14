@@ -1,0 +1,32 @@
+<div class="container mt-5">
+  <h3>Gestion des Tâches (Projet #{{ projectId }})</h3>
+  
+  <div class="input-group mb-4 mt-4">
+    <input type="text" class="form-control" placeholder="Nouvelle tâche..." [(ngModel)]="newTaskTitle">
+    <button class="btn btn-primary" (click)="addTask()">Ajouter</button>
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let task of tasks">
+      <div>
+        <input 
+          type="checkbox" 
+          class="form-check-input me-2" 
+          [checked]="task.isCompleted" 
+          (change)="toggleTask(task.id)">
+        
+        <span [class.text-decoration-line-through]="task.isCompleted">
+          {{ task.title }}
+        </span>
+      </div>
+
+      <button class="btn btn-danger btn-sm" (click)="deleteTask(task.id)">X</button>
+    </li>
+  </ul>
+
+  <div *ngIf="tasks.length === 0" class="alert alert-info mt-3">
+    Aucune tâche dans ce projet pour l'instant.
+  </div>
+  
+  <a routerLink="/projects" class="btn btn-secondary mt-4">← Retour aux projets</a>
+</div>

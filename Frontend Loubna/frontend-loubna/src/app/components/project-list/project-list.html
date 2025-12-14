@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Mes Projets</h2>
+    <button class="btn btn-success" (click)="showForm = !showForm">
+      {{ showForm ? 'Annuler' : '+ Nouveau Projet' }}
+    </button>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="showForm" class="card card-body bg-light mb-4 shadow-sm">
+    <h4>Nouveau Projet</h4>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label>Titre</label>
+        <input type="text" class="form-control" name="title" [(ngModel)]="form.title" required>
+      </div>
+      <div class="mb-3">
+        <label>Description</label>
+        <textarea class="form-control" name="description" [(ngModel)]="form.description"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let project of projects">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ project.title }}</h5>
+          <p class="card-text text-muted">{{ project.description }}</p>
+          
+          <div class="progress mb-3" style="height: 10px;">
+            <div 
+              class="progress-bar" 
+              role="progressbar" 
+              [style.width.%]="project.progress"
+              [class.bg-success]="project.progress === 100"
+              [class.bg-warning]="project.progress < 100">
+            </div>
+          </div>
+          <small class="text-muted d-block mb-3">{{ project.progress }}% complété</small>
+
+          <button 
+  class="btn btn-outline-primary btn-sm w-100" 
+  [routerLink]="['/projects', project.id, 'tasks']">
+  Voir les tâches
+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12" *ngIf="projects.length === 0 && !errorMessage">
+      <div class="alert alert-info text-center">
+        Vous n'avez aucun projet. Créez-en un !
+      </div>
+    </div>
+  </div>
+</div>
