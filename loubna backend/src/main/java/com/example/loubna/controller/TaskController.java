@@ -1,0 +1,92 @@
+package com.example.loubna.controller;
+
+import com.example.loubna.dto.request.TaskRequest;
+import com.example.loubna.dto.response.MessageResponse;
+import com.example.loubna.entity.Project;
+import com.example.loubna.entity.Task;
+import com.example.loubna.entity.User;
+import com.example.loubna.repository.ProjectRepository;
+import com.example.loubna.repository.TaskRepository;
+import com.example.loubna.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/api/tasks")
+public class TaskController {
+
+    @Autowired
+    TaskRepository taskRepository;
+
+    @Autowired
+    ProjectRepository projectRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    // 1. Ajouter une tâche à un projet
+    @PostMapping
+    public ResponseEntity<?> createTask(@RequestBody TaskRequest taskRequest) {
+        // Vérifier si le projet existe
+        Optional<Project> projectOpt = projectRepository.findById(taskRequest.getProjectId());
+
+        if (projectOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Erreur : Projet introuvable."));
+        }
+
+        Project project = projectOpt.get();
+        // (Optionnel) Ici tu pourrais vérifier si le projet appartient bien au User connecté
+
+        Task task = new Task();
+        task.setTitle(taskRequest.getTitle());
+        task.setDescription(taskRequest.getDescription());
+        task.setDueDate(taskRequest.getDueDate());
+        task.setProject(project); // Liaison importante !
+
+        taskRepository.save(task);
+
+        return ResponseEntity.ok(new MessageResponse("Tâche ajoutée avec succès !"));
+    }
+
+    // 2. Lister les tâches d'un projet spécifique
+    @GetMapping("/project/{projectId}")
+    public List<Task> getTasksByProject(@PathVariable Long projectId) {
+        return taskRepository.findByProjectId(projectId);
+    }
+
+    // 3. Marquer une tâche comme terminée (ou l'inverse)
+    @PutMapping("/{taskId}/toggle")
+    public ResponseEntity<?> toggleTaskStatus(@PathVariable Long taskId) {
+        Optional<Task> taskOpt = taskRepository.findById(taskId);
+
+        if (taskOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Erreur : Tâche introuvable."));
+        }
+
+        Task task = taskOpt.get();
+        // On inverse l'état (si true devient false, si false devient true)
+        task.setIsCompleted(!task.getIsCompleted());
+
+        taskRepository.save(task);
+
+        return ResponseEntity.ok(new MessageResponse("Statut de la tâche mis à jour !"));
+    }
+
+    // 4. Supprimer une tâche
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity<?> deleteTask(@PathVariable Long taskId) {
+        if (!taskRepository.existsById(taskId)) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Erreur : Tâche introuvable."));
+        }
+
+        taskRepository.deleteById(taskId);
+        return ResponseEntity.ok(new MessageResponse("Tâche supprimée avec succès !"));
+    }
+}
