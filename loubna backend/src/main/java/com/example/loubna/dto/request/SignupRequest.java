@@ -5,7 +5,7 @@ public class SignupRequest {
     private String email;
     private String password;
 
-    // Getters et Setters
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 

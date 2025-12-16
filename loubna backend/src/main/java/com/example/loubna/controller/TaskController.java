@@ -31,10 +31,9 @@ public class TaskController {
     @Autowired
     UserRepository userRepository;
 
-    // 1. Ajouter une tâche à un projet
     @PostMapping
     public ResponseEntity<?> createTask(@RequestBody TaskRequest taskRequest) {
-        // Vérifier si le projet existe
+
         Optional<Project> projectOpt = projectRepository.findById(taskRequest.getProjectId());
 
         if (projectOpt.isEmpty()) {
@@ -42,26 +41,25 @@ public class TaskController {
         }
 
         Project project = projectOpt.get();
-        // (Optionnel) Ici tu pourrais vérifier si le projet appartient bien au User connecté
 
         Task task = new Task();
         task.setTitle(taskRequest.getTitle());
         task.setDescription(taskRequest.getDescription());
         task.setDueDate(taskRequest.getDueDate());
-        task.setProject(project); // Liaison importante !
+        task.setProject(project);
 
         taskRepository.save(task);
 
         return ResponseEntity.ok(new MessageResponse("Tâche ajoutée avec succès !"));
     }
 
-    // 2. Lister les tâches d'un projet spécifique
+
     @GetMapping("/project/{projectId}")
     public List<Task> getTasksByProject(@PathVariable Long projectId) {
         return taskRepository.findByProjectId(projectId);
     }
 
-    // 3. Marquer une tâche comme terminée (ou l'inverse)
+
     @PutMapping("/{taskId}/toggle")
     public ResponseEntity<?> toggleTaskStatus(@PathVariable Long taskId) {
         Optional<Task> taskOpt = taskRepository.findById(taskId);
@@ -71,7 +69,7 @@ public class TaskController {
         }
 
         Task task = taskOpt.get();
-        // On inverse l'état (si true devient false, si false devient true)
+
         task.setIsCompleted(!task.getIsCompleted());
 
         taskRepository.save(task);
@@ -79,7 +77,7 @@ public class TaskController {
         return ResponseEntity.ok(new MessageResponse("Statut de la tâche mis à jour !"));
     }
 
-    // 4. Supprimer une tâche
+
     @DeleteMapping("/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable Long taskId) {
         if (!taskRepository.existsById(taskId)) {

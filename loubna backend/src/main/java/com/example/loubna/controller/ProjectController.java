@@ -25,10 +25,10 @@ public class ProjectController {
     @Autowired
     UserRepository userRepository;
 
-    // 1. Créer un projet
+
     @PostMapping
     public ResponseEntity<?> createProject(@RequestBody ProjectRequest projectRequest) {
-        // On récupère l'utilisateur connecté
+
         User currentUser = getCurrentUser();
 
         if (currentUser == null) {
@@ -38,22 +38,21 @@ public class ProjectController {
         Project project = new Project();
         project.setTitle(projectRequest.getTitle());
         project.setDescription(projectRequest.getDescription());
-        project.setUser(currentUser); // On lie le projet à l'utilisateur
+        project.setUser(currentUser);
 
         projectRepository.save(project);
 
         return ResponseEntity.ok(new MessageResponse("Projet créé avec succès !"));
     }
 
-    // 2. Lister les projets de l'utilisateur connecté
     @GetMapping
     public List<Project> getUserProjects() {
         User currentUser = getCurrentUser();
-        // On retourne la liste des projets
+
         return projectRepository.findByUserId(currentUser.getId());
     }
 
-    // --- Méthode utilitaire pour récupérer l'user connecté via le Token ---
+
     private User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

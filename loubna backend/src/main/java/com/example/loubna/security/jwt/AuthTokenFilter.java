@@ -34,7 +34,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 System.out.println("1. Token valide. Username extrait : " + username);
 
-                // On charge l'utilisateur
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 System.out.println("2. Utilisateur trouvé en base : " + userDetails.getUsername());
 
@@ -51,9 +50,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 System.out.println("0. Token null ou invalide");
             }
         } catch (Exception e) {
-            // C'est ici qu'on verra si l'utilisateur n'existe pas
+
             System.out.println("ERREUR DANS LE FILTRE : " + e.getMessage());
-            e.printStackTrace(); // Affiche toute l'erreur
+            e.printStackTrace();
             logger.error("Cannot set user authentication: {}", e);
         }
 
@@ -63,9 +62,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
 
-        // --- AJOUTEZ CETTE LIGNE POUR VOIR CE QUI SE PASSE ---
+
         System.out.println("HEADER REÇU : " + headerAuth);
-        // -----------------------------------------------------
+
 
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
             return headerAuth.substring(7);

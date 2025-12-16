@@ -8,7 +8,6 @@ public class TaskRequest {
     private LocalDate dueDate;
     private Long projectId; // Important pour lier la tâche au projet
 
-    // Getters et Setters
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
 

@@ -44,7 +44,7 @@ public class Project {
         this.updatedAt = LocalDateTime.now();
     }
 
-    //pour savoir le pourcentage davancement
+
     public Double getProgress() {
         if (tasks == null || tasks.isEmpty()) {
             return 0.0;

@@ -11,7 +11,7 @@ public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private String username; // Ici ce sera l'email
+    private String username;
     private String email;
 
     @JsonIgnore
@@ -19,7 +19,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl(Long id, String email, String password) {
         this.id = id;
-        this.username = email; // On utilise l'email comme identifiant
+        this.username = email;
         this.email = email;
         this.password = password;
     }
@@ -33,8 +33,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Pour ce projet simple, pas de rôles complexes (ADMIN/USER).
-        // On renvoie une liste vide.
+
         return Collections.emptyList();
     }
 

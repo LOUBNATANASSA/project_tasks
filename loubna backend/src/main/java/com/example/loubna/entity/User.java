@@ -20,7 +20,6 @@ public class User {
 
     private String passwordHash;
 
-    // Un utilisateur a plusieurs projets
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Project> projects;
