@@ -1,1 +1,76 @@
-@import "bootstrap/dist/css/bootstrap.min.css";
+/* --- PALETTE PROFESSIONNELLE (Corporate Blue) --- */
+:root {
+    --primary-color: #0f172a;       /* Bleu Nuit (Très sombre, pour la Navbar) */
+    --accent-color: #2563eb;        /* Bleu Roi (Pour les boutons d'action) */
+    --accent-hover: #1d4ed8;        /* Bleu plus foncé au survol */
+    --bg-color: #f8fafc;            /* Gris très clair (Reposant pour les yeux) */
+    --text-dark: #334155;           /* Gris anthracite (Plus doux que le noir pur) */
+    --white: #ffffff;
+    
+    /* Variables de structure */
+    --radius-std: 8px;              /* Coins légèrement arrondis (Standard Pro) */
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Ombre moderne */
+    --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- BASE --- */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    font-family: var(--font-stack);
+    -webkit-font-smoothing: antialiased; /* Rend le texte plus net */
+}
+
+h1, h2, h3, h4 {
+    color: var(--primary-color);
+    font-weight: 700;
+    letter-spacing: -0.5px; /* Look moderne serré */
+}
+
+/* --- BOUTONS (Style SaaS Moderne) --- */
+.btn {
+    border-radius: 6px !important; /* Pas trop rond, pas trop carré */
+    font-weight: 600;
+    padding: 10px 20px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover) !important;
+    transform: translateY(-1px);
+}
+
+/* --- CARTES (Projets, Login...) --- */
+.card {
+    background: var(--white);
+    border: 1px solid #e2e8f0 !important; /* Bordure grise très fine */
+    border-radius: var(--radius-std) !important;
+    box-shadow: var(--shadow-card);
+}
+
+.card-header {
+    background-color: var(--white) !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    color: var(--primary-color) !important;
+    font-weight: 700;
+    padding: 1.5rem 1.5rem;
+}
+
+/* --- INPUTS DE FORMULAIRE --- */
+.form-control {
+    border-radius: 6px !important;
+    border: 1px solid #cbd5e1;
+    padding: 10px 12px;
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); /* Halo bleu pro */
+}

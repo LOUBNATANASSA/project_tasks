@@ -1,0 +1,42 @@
+/* Barre sombre professionnelle */
+.custom-navbar {
+    background-color: #0f172a !important; /* Bleu nuit profond */
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #1e293b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #ffffff !important;
+    text-transform: uppercase; /* Plus sérieux */
+    letter-spacing: 1px;
+}
+
+/* Liens */
+.nav-link {
+    color: #94a3b8 !important; /* Gris clair */
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-left: 15px;
+    transition: color 0.2s ease;
+}
+
+/* Survol et Actif : Blanc pur */
+.nav-link:hover, .nav-link.active {
+    color: #ffffff !important;
+}
+
+/* Bouton Déconnexion discret mais clair */
+.btn-logout {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 6px 16px;
+    border-radius: 4px;
+}
+
+.btn-logout:hover {
+    background-color: #ef4444; /* Rouge erreur au survol (standard UI) */
+    color: white !important;
+}

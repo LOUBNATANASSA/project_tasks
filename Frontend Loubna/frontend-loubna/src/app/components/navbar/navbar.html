@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand navbar-dark custom-navbar mb-4 shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Loubna Project</a>
+    
+    <div class="navbar-nav ms-auto" *ngIf="authService.isLoggedIn()">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/projects" routerLinkActive="active">Mes Projets</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/profile" routerLinkActive="active">Mon Profil</a>
+      </li>
+      <li class="nav-item ms-3">
+        <a class="nav-link btn-logout" style="cursor: pointer" (click)="logout()">Déconnexion</a>
+      </li>
+    </div>
+
+    <div class="navbar-nav ms-auto" *ngIf="!authService.isLoggedIn()">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login">Connexion</a>
+      </li>
+    </div>
+  </div>
+</nav>
