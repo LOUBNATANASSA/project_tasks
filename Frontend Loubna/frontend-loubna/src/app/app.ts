@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 // CORRECTION : Le fichier s'appelle 'navbar.ts', donc on importe depuis './components/navbar/navbar'
 import { NavbarComponent } from './components/navbar/navbar';
+import { PopupComponent } from './components/popup/popup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   // C'est ici qu'on dit à l'application : "J'utilise la NavbarComponent"
-  imports: [CommonModule, RouterOutlet, NavbarComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, PopupComponent],
   // CORRECTION : Tes fichiers s'appellent app.html et app.css (voir image 2)
   templateUrl: './app.html',
   styleUrl: './app.css'

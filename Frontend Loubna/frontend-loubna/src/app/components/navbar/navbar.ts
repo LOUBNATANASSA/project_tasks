@@ -11,8 +11,20 @@ import { AuthService } from '../../services/auth';
   styleUrl: './navbar.css'
 })
 export class NavbarComponent {
-  
-  constructor(public authService: AuthService, private router: Router) {}
+
+  // On injecte le AuthService pour savoir si on est connecté
+  constructor(public authService: AuthService, private router: Router) { }
+
+  getUserName(): string {
+    const user = this.authService.getUser();
+    if (!user) return '';
+
+    // Debug: log the user object to see what fields are available
+    console.log('User object:', user);
+
+    // Prioritize name/username fields over email
+    return user.name || user.username || user.nom || user.prenom || user.firstName || user.lastName || user.displayName || 'User';
+  }
 
   logout(): void {
     this.authService.logout();

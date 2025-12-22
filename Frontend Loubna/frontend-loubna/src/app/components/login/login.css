@@ -1,0 +1,30 @@
+/* Login Card Specifics */
+.card-container {
+    border: none;
+    background: #ffffff;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-radius: 20px !important;
+    padding: 3rem !important;
+}
+
+/* Typography override for this page */
+h3 {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+/* Form Group Spacing */
+.form-group label {
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Submit Button Override */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}

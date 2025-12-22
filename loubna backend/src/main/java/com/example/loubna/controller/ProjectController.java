@@ -62,4 +62,24 @@ public class ProjectController {
         }
         return null;
     }
+
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProject(@PathVariable Long id) {
+        if (!projectRepository.existsById(id)) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Erreur : Projet introuvable."));
+        }
+
+        projectRepository.deleteById(id);
+        return ResponseEntity.ok(new MessageResponse("Projet supprimé avec succès !"));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
+        return projectRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

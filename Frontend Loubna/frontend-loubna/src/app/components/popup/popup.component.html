@@ -1,0 +1,28 @@
+<div class="popup-overlay" *ngIf="config" (click)="cancel()">
+    <div class="popup-container fade-in" (click)="$event.stopPropagation()">
+        <!-- Icon -->
+        <div class="popup-icon" [ngClass]="getIconClass()">
+            {{ getIcon() }}
+        </div>
+
+        <!-- Title -->
+        <h3 class="popup-title">{{ config.title }}</h3>
+
+        <!-- Message -->
+        <p class="popup-message">{{ config.message }}</p>
+
+        <!-- Buttons -->
+        <div class="popup-actions">
+            <button *ngIf="config.type === 'confirm'" class="btn btn-cancel" (click)="cancel()">
+                {{ config.cancelText || 'Cancel' }}
+            </button>
+            <button class="btn btn-confirm" [ngClass]="{
+          'btn-success': config.type === 'success',
+          'btn-error': config.type === 'error',
+          'btn-primary': config.type === 'confirm' || config.type === 'alert'
+        }" (click)="confirm()">
+                {{ config.confirmText || 'OK' }}
+            </button>
+        </div>
+    </div>
+</div>

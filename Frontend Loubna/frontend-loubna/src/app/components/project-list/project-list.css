@@ -1,0 +1,234 @@
+/* --- PALETTE PROFESSIONNELLE (Corporate Blue) --- */
+:root {
+    --primary-color: #0f172a;
+    --accent-color: #2563eb;
+    --accent-hover: #1d4ed8;
+    --bg-color: #f8fafc;
+    --text-dark: #334155;
+    --white: #ffffff;
+
+    --radius-std: 8px;
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+}
+
+/* --- BASE --- */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    font-family: var(--font-stack);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+    color: var(--primary-color);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* --- BOUTONS (Style SaaS Moderne) --- */
+.btn {
+    border-radius: 6px !important;
+    font-weight: 600;
+    padding: 10px 20px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Nouveau Projet Button */
+.btn-new-project {
+    background-color: #BF5AAC !important;
+    border-color: #BF5AAC !important;
+    color: white !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-new-project:hover {
+    filter: brightness(0.9);
+    transform: translateY(-1px);
+}
+
+/* --- CARTES (Magic Card / Uiverse-inspired) --- */
+.magic-card {
+  --bg-start: #113931;
+  --bg-end: #acb6e5;
+  --accent-1: #f665cd;
+  --accent-2: #291b17;
+  --accent-3: #fa84bb;
+  --accent-4: #8fd3f4;
+
+  background: linear-gradient(to right, var(--bg-start) 0%, var(--bg-end) 100%);
+  border-radius: 1rem;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 254px;
+  padding: 0;
+  overflow: visible;
+  transition: transform 0.25s ease;
+  cursor: pointer;
+
+  /* aspect ratio (si supporté) pour un rendu harmonieux */
+  aspect-ratio: 3 / 2;
+  display: block;
+  box-shadow: 0 10px 30px rgba(16,24,40,0.08);
+  border: none !important;
+}
+
+/* arrière-plans inclinés */
+.magic-card::before,
+.magic-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  z-index: -1;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.magic-card::before {
+  background: linear-gradient(to bottom right, var(--accent-1) 0%, var(--accent-2) 100%);
+  transform: rotate(2deg) translateY(0);
+}
+
+.magic-card::after {
+  background: linear-gradient(to top right, var(--accent-3) 0%, var(--accent-4) 100%);
+  transform: rotate(-2deg) translateY(0);
+}
+
+/* Hover : légère rotation + déplacement des calques */
+.magic-card:hover {
+  transform: rotate(3deg) translateY(-6px);
+}
+.magic-card:hover::before {
+  transform: rotate(6deg) translateY(-6px);
+  opacity: 0.95;
+}
+.magic-card:hover::after {
+  transform: rotate(-6deg) translateY(6px);
+  opacity: 0.95;
+}
+
+/* Contenu interne — carte blanche pour lisibilité */
+.magic-card .card-info {
+  --color: #292b2c;
+  background: #ffffff;
+  color: var(--color);
+  width: 100%;
+  height: 100%;
+  border-radius: 0.7rem;
+  position: relative;
+  z-index: 2;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* (Optionnel) zone image carrée */
+.magic-card .card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.6rem;
+  background-color: #eee;
+  border: 3px solid rgba(0,0,0,0.04);
+  box-shadow: 0 8px 20px rgba(2,6,23,0.04);
+  overflow: hidden;
+}
+
+/* Titres */
+.magic-card .title,
+.magic-card .card-title {
+  font-weight: 700;
+  margin: 0;
+  color: var(--primary-dark, #151522);
+  letter-spacing: 0.02em;
+}
+
+/* Progress Bar Customization */
+.progress {
+    background-color: #f1f5f9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background-color: var(--primary);
+    background-image: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+    transition: width 0.6s ease;
+}
+
+.progress-bar.bg-success {
+    background-image: linear-gradient(90deg, #34d399 0%, #10b981 100%) !important;
+}
+
+/* New Project Form Area */
+.card-body.bg-light {
+    background-color: #ffffff !important;
+    border: 2px dashed #cbd5e1 !important;
+    box-shadow: none !important;
+}
+
+/* Boutons outline */
+.btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary);
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .magic-card { aspect-ratio: auto; min-height: 220px; }
+  .magic-card .card-image { aspect-ratio: 16/9; }
+}
+.pr{
+    margin-bottom: 1.5cm !important;
+    margin-left: 11cm !important;
+    margin-top: 0.5cm !important;
+    color: #000000 !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.btn-new-project {
+    margin-top: -0.5cm !important;
+
+   
+}
+
+/* Styles spécifiques à la barre de recherche dans la liste de projets */
+.search-wrapper .input-group {
+  max-width: 420px;
+  box-shadow: 0 2px 8px rgba(16,24,40,0.04);
+  border-radius: 0.6rem;
+  overflow: hidden;
+  margin-right: 6cm;
+  margin-top: -0.5cm;
+}
+
+.search-wrapper .input-group .input-group-text {
+  border: none;
+  background: transparent;
+}
+
+.search-wrapper input.form-control {
+  border-left: 0;
+  border-right: 0;
+  padding: 0.5rem 0.75rem;
+}
+
+
+
+/* Responsive */
+@media (max-width: 576px) {
+  .search-wrapper .input-group { max-width: 100%; }
+}

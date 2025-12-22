@@ -15,7 +15,7 @@ export class ProjectService {
   private getHeaders(): HttpHeaders {
     const user = this.authService.getUser();
     // Vérifie bien si ton backend renvoie 'accessToken' ou 'token' dans la réponse login
-    const token = user ? (user.token || user.accessToken) : ''; 
+    const token = user ? (user.token || user.accessToken) : '';
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -32,4 +32,16 @@ export class ProjectService {
       description
     }, { headers: this.getHeaders() });
   }
+
+
+ deleteProject(id: number): Observable<any> {
+  return this.http.delete(`${API_URL}/${id}`, { headers: this.getHeaders() });
+}
+
+
+// ... à l'intérieur de la classe ProjectService ...
+getProjectById(id: number): Observable<any> {
+  return this.http.get(`${API_URL}/${id}`, { headers: this.getHeaders() });
+}
+
 }

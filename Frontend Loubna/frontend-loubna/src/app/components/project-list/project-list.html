@@ -1,9 +1,27 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Mes Projets</h2>
-    <button class="btn btn-success" (click)="showForm = !showForm">
-      {{ showForm ? 'Annuler' : '+ Nouveau Projet' }}
-    </button>
+    <h2>My Projects</h2>
+
+    <!-- Search bar + New Project button -->
+    <div class="d-flex align-items-center gap-2">
+      <div class="search-wrapper">
+        <div class="input-group">
+          <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Rechercher un projet..."
+            [(ngModel)]="searchTerm"
+            aria-label="Search projects"
+          />
+         
+        </div>
+      </div>
+
+      <button class="btn btn-new-project" (click)="showForm = !showForm">
+        {{ showForm ? 'Cancel' : '+ New Project' }}
+      </button>
+    </div>
   </div>
 
   <div *ngIf="errorMessage" class="alert alert-danger">
@@ -11,50 +29,60 @@
   </div>
 
   <div *ngIf="showForm" class="card card-body bg-light mb-4 shadow-sm">
-    <h4>Nouveau Projet</h4>
-    <form (ngSubmit)="onSubmit()">
+    <h4>New Project</h4>
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="mb-3">
-        <label>Titre</label>
-        <input type="text" class="form-control" name="title" [(ngModel)]="form.title" required>
+        <label>Title <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" name="title" [(ngModel)]="form.title" required #title="ngModel">
+        <div class="text-danger" *ngIf="title.invalid && (title.dirty || title.touched || f.submitted)">
+          Title is required
+        </div>
       </div>
       <div class="mb-3">
-        <label>Description</label>
-        <textarea class="form-control" name="description" [(ngModel)]="form.description"></textarea>
+        <label>Description <span class="text-danger">*</span></label>
+        <textarea class="form-control" name="description" [(ngModel)]="form.description" required
+          #description="ngModel"></textarea>
+        <div class="text-danger"
+          *ngIf="description.invalid && (description.dirty || description.touched || f.submitted)">
+          Description is required
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">Enregistrer</button>
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Save</button>
     </form>
   </div>
 
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let project of projects">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <h5 class="card-title">{{ project.title }}</h5>
-          <p class="card-text text-muted">{{ project.description }}</p>
-          
-          <div class="progress mb-3" style="height: 10px;">
-            <div 
-              class="progress-bar" 
-              role="progressbar" 
-              [style.width.%]="project.progress"
-              [class.bg-success]="project.progress === 100"
-              [class.bg-warning]="project.progress < 100">
+    <div class="col-md-4 mb-4" *ngFor="let project of filteredProjects">
+      <div class="stack">
+        <div class="magic-card h-100">
+          <div class="card-info">
+            <h5 class="card-title">{{ project.title }}</h5>
+            <p class="card-text text-muted">{{ project.description }}</p>
+
+            <div class="progress mb-3" style="height: 10px;">
+              <div class="progress-bar" role="progressbar" [style.width.%]="project.progress"
+                [class.bg-success]="project.progress === 100" [class.bg-warning]="project.progress < 100">
+              </div>
+            </div>
+            <small class="text-muted d-block mb-3">{{ project.progress }}% completed</small>
+
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-primary btn-sm flex-grow-1"
+                [routerLink]="['/projects', project.id, 'tasks']">
+                View Tasks
+              </button>
+              <button class="btn btn-outline-danger btn-sm" (click)="deleteProject(project.id)">
+                Delete
+              </button>
             </div>
           </div>
-          <small class="text-muted d-block mb-3">{{ project.progress }}% complété</small>
-
-          <button 
-  class="btn btn-outline-primary btn-sm w-100" 
-  [routerLink]="['/projects', project.id, 'tasks']">
-  Voir les tâches
-</button>
         </div>
       </div>
     </div>
 
-    <div class="col-12" *ngIf="projects.length === 0 && !errorMessage">
+    <div class="col-12" *ngIf="filteredProjects.length === 0 && !errorMessage">
       <div class="alert alert-info text-center">
-        Vous n'avez aucun projet. Créez-en un !
+        Aucun projet trouvé.
       </div>
     </div>
   </div>

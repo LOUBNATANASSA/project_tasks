@@ -1,0 +1,137 @@
+/* Task List specific styles */
+.list-group-item {
+    border: none;
+    margin-bottom: 0.5rem;
+    border-radius: 12px !important;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s;
+    padding: 1rem 1.25rem;
+    
+}
+
+.list-group-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background-color: #f8fafc;
+}
+
+/* Finished Task Style */
+.text-decoration-line-through {
+    color: #94a3b8;
+    /* Text muted */
+}
+
+/* Custom Checkbox Size */
+.form-check-input {
+    width: 1.3em;
+    height: 1.3em;
+    border-color: #cbd5e1;
+    cursor: pointer;
+     margin-right: -9cm;
+     
+    
+}
+
+.form-check-input:checked {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+/* Delete Button */
+.btn-danger {
+    background-color: #fee2e2;
+    color: #ef4444;
+    border: none;
+    border-radius: 8px !important;
+    padding: 4px 10px;
+}
+
+.btn-danger:hover {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* Edit Button */
+.btn-edit {
+    background-color: #e0f2fe;
+    color: #0284c7;
+    border: none;
+    border-radius: 8px !important;
+    padding: 4px 10px;
+    transition: all 0.2s;
+}
+
+.btn-edit:hover {
+    background-color: #0284c7;
+    color: white;
+}
+
+/* Save Button */
+.btn-save {
+    background-color: #dcfce7;
+    color: #16a34a;
+    border: none;
+    border-radius: 8px !important;
+    padding: 4px 10px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.btn-save:hover {
+    background-color: #16a34a;
+    color: white;
+}
+
+/* Cancel Button */
+.btn-cancel {
+    background-color: #f3f4f6;
+    color: #6b7280;
+    border: none;
+    border-radius: 8px !important;
+    padding: 4px 10px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: #6b7280;
+    color: white;
+}
+
+/* Edit Mode Input */
+.edit-mode .edit-input {
+    border: 2px solid var(--secondary, #BF5AAC);
+    border-radius: 8px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.95rem;
+    max-width: 300px;
+}
+
+.edit-mode .edit-input:focus {
+    outline: none;
+    border-color: var(--primary, #BF5AAC);
+    box-shadow: 0 0 0 3px rgba(242, 187, 225, 0.2);
+}
+
+/* Action Buttons Container */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.edit-icon {
+    font-style: normal;
+}
+
+.text-primary {
+    color: #BF5AAC !important;
+}
+
+.btn-primary {
+ margin-left: 1cm !important;
+}
+
+.btn btn-warning btn-sm me-2 {
+    color: #16a34a !important;
+}

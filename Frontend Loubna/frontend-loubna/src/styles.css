@@ -1,76 +1,129 @@
-/* --- PALETTE PROFESSIONNELLE (Corporate Blue) --- */
+/* --- PREMIUM MEDICAL THEME --- */
 :root {
-    --primary-color: #0f172a;       /* Bleu Nuit (Très sombre, pour la Navbar) */
-    --accent-color: #2563eb;        /* Bleu Roi (Pour les boutons d'action) */
-    --accent-hover: #1d4ed8;        /* Bleu plus foncé au survol */
-    --bg-color: #f8fafc;            /* Gris très clair (Reposant pour les yeux) */
-    --text-dark: #334155;           /* Gris anthracite (Plus doux que le noir pur) */
-    --white: #ffffff;
-    
-    /* Variables de structure */
-    --radius-std: 8px;              /* Coins légèrement arrondis (Standard Pro) */
-    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Ombre moderne */
-    --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    /* Color Palette */
+    --primary: #BF5AAC;
+    /* Soft Pink - Requested */
+    --primary-dark: #d99ac5;
+    /* Darker shade for hover */
+    --secondary: #F7F0F5;
+    /* Pale Lavender/White - Requested */
+    --accent: #e0a3cd;
+    /* Accent Pink */
+
+    /* Neomorphic Backgrounds */
+    --bg-body: #F7F0F5;
+    /* Using requested light color for body bg */
+    --bg-card: #ffffff;
+    --bg-glass: rgba(255, 255, 255, 0.85);
+    /* Slightly more transparent for glass effect */
+
+    /* Typography */
+    --text-main: #4a4a4a;
+    /* Softer dark text to match pastel theme */
+    --text-muted: #888888;
+    --font-main: 'Poppins', sans-serif;
+
+    /* Structural */
+    --radius-lg: 20px;
+    /* Rounder corners for softer look */
+    --radius-md: 12px;
+    --shadow-soft: 0 10px 30px -10px rgba(242, 187, 225, 0.3), 0 5px 15px -5px rgba(0, 0, 0, 0.05);
+    /* Colored shadow */
+    --shadow-hover: 0 20px 40px -10px rgba(242, 187, 225, 0.4), 0 10px 20px -5px rgba(0, 0, 0, 0.05);
 }
 
-/* --- BASE --- */
 body {
-    background-color: var(--bg-color);
-    color: var(--text-dark);
-    font-family: var(--font-stack);
-    -webkit-font-smoothing: antialiased; /* Rend le texte plus net */
+    background-color: var(--bg-body);
+    font-family: var(--font-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4 {
-    color: var(--primary-color);
-    font-weight: 700;
-    letter-spacing: -0.5px; /* Look moderne serré */
-}
-
-/* --- BOUTONS (Style SaaS Moderne) --- */
-.btn {
-    border-radius: 6px !important; /* Pas trop rond, pas trop carré */
+/* --- COMMON UTILITIES --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-main);
     font-weight: 600;
-    padding: 10px 20px;
-    letter-spacing: 0.3px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease-in-out;
+    letter-spacing: -0.02em;
 }
 
-.btn-primary {
-    background-color: var(--accent-color) !important;
-    border-color: var(--accent-color) !important;
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-hover) !important;
-    transform: translateY(-1px);
-}
-
-/* --- CARTES (Projets, Login...) --- */
+/* Rounded Cards with Soft Shadow */
 .card {
-    background: var(--white);
-    border: 1px solid #e2e8f0 !important; /* Bordure grise très fine */
-    border-radius: var(--radius-std) !important;
-    box-shadow: var(--shadow-card);
+    background: var(--bg-card);
+    border: none !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 .card-header {
-    background-color: var(--white) !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-    color: var(--primary-color) !important;
-    font-weight: 700;
-    padding: 1.5rem 1.5rem;
+    background-color: transparent !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding: 1.5rem 1.5rem !important;
+    font-weight: 600;
+    color: var(--primary-dark);
 }
 
-/* --- INPUTS DE FORMULAIRE --- */
+/* --- BUTTONS --- */
+.btn {
+    border-radius: 50px !important;
+    /* Pill shape */
+    padding: 0.6rem 1.5rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.3px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+    border: none !important;
+}
+
+.btn-primary:hover {
+    filter: brightness(110%);
+    box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.3);
+}
+
+/* --- FORM INPUTS --- */
 .form-control {
-    border-radius: 6px !important;
-    border: 1px solid #cbd5e1;
-    padding: 10px 12px;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid #e2e8f0;
+    padding: 0.8rem 1rem !important;
+    background-color: #f8fafc;
+    transition: all 0.2s;
 }
 
 .form-control:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); /* Halo bleu pro */
+    background-color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
 }

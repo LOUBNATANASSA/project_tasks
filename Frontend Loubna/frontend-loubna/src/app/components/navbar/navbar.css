@@ -1,42 +1,85 @@
-/* Barre sombre professionnelle */
+/* --- BARRE DE NAVIGATION --- */
 .custom-navbar {
-    background-color: #0f172a !important; /* Bleu nuit profond */
+    background-color: #BF5AAC !important;
+
     padding: 0.8rem 1rem;
-    border-bottom: 1px solid #1e293b;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    /* Hauteur fixe pour que le logo respire */
+    transition: all 0.3s ease;
 }
 
-/* Logo */
-.navbar-brand {
+/* --- LOGO --- */
+.navbar-logo {
+    height: 40px;
+    /* Taille du logo */
+    width: auto;
+    /* Largeur automatique pour ne pas déformer */
+    border-radius: 4px;
+    /* Coins légèrement arrondis si ton logo est carré */
+    object-fit: contain;
+}
+
+/* --- NOM (BRAND) --- */
+.brand-text {
     font-weight: 700;
-    font-size: 1.25rem;
-    color: #ffffff !important;
-    text-transform: uppercase; /* Plus sérieux */
-    letter-spacing: 1px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-/* Liens */
+/* --- LIENS (Droite) --- */
 .nav-link {
-    color: #94a3b8 !important; /* Gris clair */
+    color: rgba(255, 255, 255, 0.9) !important;
     font-weight: 500;
     font-size: 0.95rem;
-    margin-left: 15px;
+    margin-left: 20px;
+    /* Espace entre les mots */
+    text-transform: uppercase;
+    /* Comme sur ton image (HOME, ABOUT...) */
+    letter-spacing: 1px;
     transition: color 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-/* Survol et Actif : Blanc pur */
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
     color: #ffffff !important;
+    
 }
 
-/* Bouton Déconnexion discret mais clair */
+/* --- SÉPARATEUR (|) --- */
+.divider {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.2rem;
+}
+
+/* --- BOUTON DÉCONNEXION --- */
 .btn-logout {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 6px 16px;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 15px;
+    font-size: 0.85rem;
     border-radius: 4px;
+    text-transform: uppercase;
 }
 
 .btn-logout:hover {
-    background-color: #ef4444; /* Rouge erreur au survol (standard UI) */
-    color: white !important;
+    background-color: #d9534f;
+    /* Rouge discret au survol */
+    border-color: #d9534f;
+}
+
+/* --- TEXTE DE BIENVENUE --- */
+.welcome-text {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+.welcome-text.me-3 {
+    margin-right: 18cm !important;
+   
 }

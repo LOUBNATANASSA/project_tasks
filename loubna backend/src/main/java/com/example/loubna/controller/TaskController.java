@@ -87,4 +87,32 @@ public class TaskController {
         taskRepository.deleteById(taskId);
         return ResponseEntity.ok(new MessageResponse("Tâche supprimée avec succès !"));
     }
+
+    @PutMapping("/{taskId}")
+    public ResponseEntity<?> updateTask(
+            @PathVariable Long taskId,
+            @RequestBody TaskRequest taskRequest) {
+
+        Optional<Task> taskOpt = taskRepository.findById(taskId);
+
+        if (taskOpt.isEmpty()) {
+            return ResponseEntity.badRequest()
+                    .body(new MessageResponse("Erreur : Tâche introuvable."));
+        }
+
+        Task task = taskOpt.get();
+
+        task.setTitle(taskRequest.getTitle());
+        task.setDescription(taskRequest.getDescription());
+        task.setDueDate(taskRequest.getDueDate());
+
+        taskRepository.save(task);
+
+        return ResponseEntity.ok(
+                new MessageResponse("Tâche mise à jour avec succès !")
+        );
+    }
+
+
+
 }

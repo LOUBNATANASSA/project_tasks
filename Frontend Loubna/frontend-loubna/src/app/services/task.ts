@@ -21,22 +21,23 @@ export class TaskService {
     });
   }
 
-  // Récupérer les tâches d'un projet
   getTasksByProject(projectId: number): Observable<any> {
     return this.http.get(`${API_URL}/project/${projectId}`, { headers: this.getHeaders() });
   }
 
-  // Créer une tâche
   createTask(task: any): Observable<any> {
     return this.http.post(API_URL, task, { headers: this.getHeaders() });
   }
 
-  // Valider une tâche (Toggle)
   toggleTask(taskId: number): Observable<any> {
     return this.http.put(`${API_URL}/${taskId}/toggle`, {}, { headers: this.getHeaders() });
   }
 
-  // Supprimer une tâche
+  // Nouvelle méthode pour la modification
+  updateTask(taskId: number, task: any): Observable<any> {
+    return this.http.put(`${API_URL}/${taskId}`, task, { headers: this.getHeaders() });
+  }
+
   deleteTask(taskId: number): Observable<any> {
     return this.http.delete(`${API_URL}/${taskId}`, { headers: this.getHeaders() });
   }
