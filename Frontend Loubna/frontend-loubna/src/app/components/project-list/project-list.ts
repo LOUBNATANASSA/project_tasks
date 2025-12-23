@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ProjectService } from '../../services/project';
+import { TaskService } from '../../services/task';
 
 @Component({
   selector: 'app-project-list',
@@ -18,10 +19,16 @@ export class ProjectListComponent implements OnInit {
   form: any = { title: '', description: '' };
   searchTerm = '';
 
+  // Stats storage: projectId -> { total, completed, completedNames }
+  projectStats: { [key: number]: { total: number, completed: number, completedNames: string[] } } = {};
+
   // ID of the project being edited (null = creation)
   editingId: number | null = null;
 
-  constructor(private projectService: ProjectService) { }
+  constructor(
+    private projectService: ProjectService,
+    private taskService: TaskService
+  ) { }
 
   ngOnInit(): void {
     this.loadProjects();
@@ -31,11 +38,30 @@ export class ProjectListComponent implements OnInit {
     this.projectService.getAllProjects().subscribe({
       next: (data: any) => {
         this.projects = data || [];
+        this.loadAllProjectStats();
       },
       error: (err: any) => {
         console.error(err);
         this.errorMessage = 'Unable to load projects.';
       }
+    });
+  }
+
+  loadAllProjectStats(): void {
+    this.projects.forEach(project => {
+      console.log('Loading stats for project:', project.id);
+      this.taskService.getTasksByProject(project.id).subscribe({
+        next: (tasks: any[]) => {
+          const total = tasks.length;
+          const completedTasks = tasks.filter(t => t.isCompleted);
+          const completed = completedTasks.length;
+          const completedNames = completedTasks.map(t => t.title);
+
+          console.log(`Stats for ${project.id}: ${completed}/${total}`);
+          this.projectStats[project.id] = { total, completed, completedNames };
+        },
+        error: (err) => console.error(`Error loading stats for project ${project.id}`, err)
+      });
     });
   }
 
@@ -50,7 +76,7 @@ export class ProjectListComponent implements OnInit {
           this.showForm = false;
           this.loadProjects();
         },
-        error: (err) => { console.error(err); this.errorMessage = 'Error during creation.'; }
+        error: (err: any) => { console.error(err); this.errorMessage = 'Error during creation.'; }
       });
     } else {
       // update
@@ -61,7 +87,7 @@ export class ProjectListComponent implements OnInit {
           this.editingId = null;
           this.loadProjects();
         },
-        error: (err) => { console.error(err); this.errorMessage = 'Error during update.'; }
+        error: (err: any) => { console.error(err); this.errorMessage = 'Error during update.'; }
       });
     }
   }
@@ -70,7 +96,7 @@ export class ProjectListComponent implements OnInit {
     if (!confirm('Delete this project?')) return;
     this.projectService.deleteProject(id).subscribe({
       next: () => this.loadProjects(),
-      error: (err) => { console.error(err); this.errorMessage = 'Error during deletion.'; }
+      error: (err: any) => { console.error(err); this.errorMessage = 'Error during deletion.'; }
     });
   }
 

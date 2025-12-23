@@ -57,12 +57,23 @@
             <h5 class="card-title">{{ project.title }}</h5>
             <p class="card-text text-muted">{{ project.description }}</p>
 
-            <div class="progress mb-3" style="height: 10px;">
-              <div class="progress-bar" role="progressbar" [style.width.%]="project.progress"
-                [class.bg-success]="project.progress === 100" [class.bg-warning]="project.progress < 100">
+            <ng-container *ngIf="projectStats[project.id]; else loadingStats">
+              <div class="d-flex justify-content-between mb-1 small text-muted">
+                <span>Tasks: {{ projectStats[project.id].completed }} / {{ projectStats[project.id].total }}</span>
+                <span>{{ projectStats[project.id].total > 0 ? (projectStats[project.id].completed /
+                  projectStats[project.id].total | percent:'1.0-0') : '0%' }}</span>
               </div>
-            </div>
-            <small class="text-muted d-block mb-3">{{ project.progress }}% completed</small>
+              <div class="progress mb-3" style="height: 10px;">
+                <div class="progress-bar" role="progressbar"
+                  [style.width.%]="projectStats[project.id].total > 0 ? (projectStats[project.id].completed / projectStats[project.id].total * 100) : 0"
+                  [class.bg-success]="projectStats[project.id].completed === projectStats[project.id].total && projectStats[project.id].total > 0"
+                  [class.bg-warning]="projectStats[project.id].completed < projectStats[project.id].total">
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #loadingStats>
+              <small class="text-muted d-block mb-3">Loading statistics...</small>
+            </ng-template>
 
             <div class="d-flex gap-2">
               <button class="btn btn-outline-primary btn-sm flex-grow-1"
