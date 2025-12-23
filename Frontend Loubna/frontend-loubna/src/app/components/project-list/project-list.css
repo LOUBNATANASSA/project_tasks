@@ -200,7 +200,7 @@ h1, h2, h3, h4 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .btn-new-project {
-    margin-top: -0.5cm !important;
+    margin-top: -1cm !important;
 
    
 }
@@ -212,7 +212,8 @@ h1, h2, h3, h4 {
   border-radius: 0.6rem;
   overflow: hidden;
   margin-right: 6cm;
-  margin-top: -0.5cm;
+  
+  margin-bottom: 1cm;
 }
 
 .search-wrapper .input-group .input-group-text {
