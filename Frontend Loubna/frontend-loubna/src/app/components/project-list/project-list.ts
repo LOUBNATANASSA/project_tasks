@@ -18,7 +18,7 @@ export class ProjectListComponent implements OnInit {
   form: any = { title: '', description: '' };
   searchTerm = '';
 
-  // id du projet en cours d'édition (null = création)
+  // ID of the project being edited (null = creation)
   editingId: number | null = null;
 
   constructor(private projectService: ProjectService) { }
@@ -34,7 +34,7 @@ export class ProjectListComponent implements OnInit {
       },
       error: (err: any) => {
         console.error(err);
-        this.errorMessage = 'Impossible de charger les projets.';
+        this.errorMessage = 'Unable to load projects.';
       }
     });
   }
@@ -43,17 +43,17 @@ export class ProjectListComponent implements OnInit {
     if (!this.form.title || !this.form.description) return;
 
     if (this.editingId == null) {
-      // création
+      // creation
       this.projectService.createProject(this.form.title, this.form.description).subscribe({
         next: () => {
           this.form = { title: '', description: '' };
           this.showForm = false;
           this.loadProjects();
         },
-        error: (err) => { console.error(err); this.errorMessage = 'Erreur lors de la création.'; }
+        error: (err) => { console.error(err); this.errorMessage = 'Error during creation.'; }
       });
     } else {
-      // mise à jour
+      // update
       this.projectService.updateProject(this.editingId, this.form.title, this.form.description).subscribe({
         next: () => {
           this.form = { title: '', description: '' };
@@ -61,20 +61,20 @@ export class ProjectListComponent implements OnInit {
           this.editingId = null;
           this.loadProjects();
         },
-        error: (err) => { console.error(err); this.errorMessage = 'Erreur lors de la mise à jour.'; }
+        error: (err) => { console.error(err); this.errorMessage = 'Error during update.'; }
       });
     }
   }
 
   deleteProject(id: number): void {
-    if (!confirm('Supprimer ce projet ?')) return;
+    if (!confirm('Delete this project?')) return;
     this.projectService.deleteProject(id).subscribe({
       next: () => this.loadProjects(),
-      error: (err) => { console.error(err); this.errorMessage = 'Erreur lors de la suppression.'; }
+      error: (err) => { console.error(err); this.errorMessage = 'Error during deletion.'; }
     });
   }
 
-  // Passe le formulaire en mode édition
+  // Switch the form to edit mode
   editProject(project: any): void {
     this.showForm = true;
     this.editingId = project.id;
@@ -84,18 +84,18 @@ export class ProjectListComponent implements OnInit {
     };
   }
 
-  // Annuler l'édition / réinitialiser le formulaire
+  // Cancel editing / reset the form
   cancelEdit(): void {
     this.showForm = false;
     this.editingId = null;
     this.form = { title: '', description: '' };
   }
 
-  // Méthode pour basculer l'affichage du formulaire et annuler l'édition si on ferme
+  // Method to toggle form display and cancel editing if closing
   toggleForm(): void {
     // on inverse l'état
     this.showForm = !this.showForm;
-    // si on vient de fermer le formulaire, on annule l'édition
+    // if we just closed the form, cancel editing
     if (!this.showForm) {
       this.cancelEdit();
     }

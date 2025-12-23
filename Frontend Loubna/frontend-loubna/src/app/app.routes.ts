@@ -4,6 +4,7 @@ import { ProjectListComponent } from './components/project-list/project-list';
 import { TaskListComponent } from './components/task-list/task-list';
 import { LandingComponent } from './components/landing/landing.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CreateTaskComponent } from './components/create-task/create-task.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent }, // Page d'accueil avec Login et Register
@@ -12,5 +13,6 @@ export const routes: Routes = [
     { path: 'landing', component: LandingComponent },
     { path: 'projects', component: ProjectListComponent },
     { path: 'projects/:id/tasks', component: TaskListComponent },
+    { path: 'projects/:id/tasks/create', component: CreateTaskComponent }, // New Route for Create Task
     { path: '**', redirectTo: '' } // Redirect unknown paths to login
 ];

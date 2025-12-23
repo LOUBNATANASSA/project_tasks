@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    // 1. SI DÉJÀ CONNECTÉ -> HOP, ON REDIRIGE DIRECT
+    // 1. IF ALREADY LOGGED IN -> REDIRECT DIRECTLY
     if (this.authService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.router.navigate(['/projects']);
@@ -39,11 +39,11 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
 
-        // 2. CONNEXION RÉUSSIE -> HOP, ON REDIRIGE
+        // 2. LOGIN SUCCESSFUL -> REDIRECT
         this.router.navigate(['/projects']);
       },
       error: err => {
-        this.errorMessage = err.error.message || "Échec de la connexion";
+        this.errorMessage = err.error.message || "Login failed";
         this.isLoginFailed = true;
       }
     });

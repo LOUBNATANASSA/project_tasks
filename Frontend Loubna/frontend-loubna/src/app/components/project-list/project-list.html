@@ -1,22 +1,17 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    
+
 
     <div class="d-flex align-items-center gap-2">
       <div class="search-wrapper">
         <div class="input-group">
           <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-          <input
-            type="search"
-            class="form-control"
-            placeholder="Rechercher un projet..."
-            [(ngModel)]="searchTerm"
-            aria-label="Search projects"
-          />
+          <input type="search" class="form-control" placeholder="Search for a project..." [(ngModel)]="searchTerm"
+            aria-label="Search projects" />
         </div>
       </div>
 
-      <!-- Utiliser la méthode toggleForm() au lieu d'expressions complexes dans le template -->
+      <!-- Use toggleForm() method instead of complex expressions in the template -->
       <button class="btn btn-new-project" (click)="toggleForm()">
         {{ showForm ? 'Cancel' : '+ New Project' }}
       </button>
@@ -47,7 +42,8 @@
         </div>
       </div>
       <div class="d-flex align-items-center">
-        <button type="submit" class="btn btn-primary" [disabled]="f.invalid">{{ editingId ? 'Update' : 'Save' }}</button>
+        <button type="submit" class="btn btn-primary" [disabled]="f.invalid">{{ editingId ? 'Update' : 'Save'
+          }}</button>
         <button type="button" *ngIf="editingId" (click)="cancelEdit()" class="btn btn-secondary ms-2">Cancel</button>
       </div>
     </form>
@@ -87,7 +83,7 @@
 
     <div class="col-12" *ngIf="filteredProjects.length === 0 && !errorMessage">
       <div class="alert alert-info text-center">
-        Aucun projet trouvé.
+        No projects found.
       </div>
     </div>
   </div>

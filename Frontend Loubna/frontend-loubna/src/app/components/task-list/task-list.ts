@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TaskService } from '../../services/task';
 import { PopupService } from '../../services/popup.service';
-import { ProjectService } from '../../services/project'; // 1. BIEN IMPORTER
+import { ProjectService } from '../../services/project'; // 1. IMPORT
 
 @Component({
   selector: 'app-task-list',
@@ -16,30 +16,32 @@ import { ProjectService } from '../../services/project'; // 1. BIEN IMPORTER
 export class TaskListComponent implements OnInit {
   tasks: any[] = [];
   projectId: any;
-  projectTitle: string = ''; // 2. VARIABLE POUR LE TITRE
+  projectTitle: string = ''; // 2. VARIABLE FOR THE TITLE
   newTaskTitle = '';
   editingTaskId: number | null = null;
   editingTaskTitle = '';
+  editingTaskDescription = '';
+  editingTaskDueDate = '';
 
   constructor(
     private taskService: TaskService,
-    private projectService: ProjectService, // 3. BIEN INJECTER
+    private projectService: ProjectService,
     private route: ActivatedRoute,
     private popupService: PopupService
   ) { }
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.paramMap.get('id');
-    this.loadProjectInfo(); // 4. APPEL ICI
+    this.loadProjectInfo();
     this.loadTasks();
   }
 
   loadProjectInfo(): void {
     this.projectService.getProjectById(this.projectId).subscribe({
       next: (project: any) => {
-        this.projectTitle = project.title; // Récupère le titre depuis le JSON
+        this.projectTitle = project.title;
       },
-      error: (err: any) => console.error('Erreur lors de la récupération du projet', err)
+      error: (err: any) => console.error('Error while retrieving project', err)
     });
   }
 
@@ -50,7 +52,6 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  // ... reste des méthodes (addTask, saveEdit, etc.) ...
   addTask(): void {
     if (!this.newTaskTitle) return;
     const task = { title: this.newTaskTitle, description: '', projectId: this.projectId };
@@ -65,16 +66,25 @@ export class TaskListComponent implements OnInit {
   startEdit(task: any): void {
     this.editingTaskId = task.id;
     this.editingTaskTitle = task.title;
+    this.editingTaskDescription = task.description;
+    this.editingTaskDueDate = task.dueDate;
   }
 
   cancelEdit(): void {
     this.editingTaskId = null;
     this.editingTaskTitle = '';
+    this.editingTaskDescription = '';
+    this.editingTaskDueDate = '';
   }
 
   saveEdit(task: any): void {
     if (!this.editingTaskTitle.trim()) return;
-    const updatedTask = { ...task, title: this.editingTaskTitle };
+    const updatedTask = {
+      ...task,
+      title: this.editingTaskTitle,
+      description: this.editingTaskDescription,
+      dueDate: this.editingTaskDueDate
+    };
     this.taskService.updateTask(task.id, updatedTask).subscribe({
       next: () => {
         this.editingTaskId = null;
@@ -90,7 +100,7 @@ export class TaskListComponent implements OnInit {
   }
 
   deleteTask(taskId: number): void {
-    this.popupService.confirm('Supprimer la tâche', 'Voulez-vous supprimer cette tâche ?').subscribe(res => {
+    this.popupService.confirm('Delete Task', 'Do you want to delete this task?').subscribe(res => {
       if (res.confirmed) {
         this.taskService.deleteTask(taskId).subscribe({ next: () => this.loadTasks() });
       }

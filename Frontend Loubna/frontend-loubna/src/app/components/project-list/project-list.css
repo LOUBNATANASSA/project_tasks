@@ -1,58 +1,61 @@
-/* --- PALETTE PROFESSIONNELLE (Corporate Blue) --- */
+/* --- PROFESSIONAL PALETTE (Corporate Blue) --- */
 :root {
-    --primary-color: #0f172a;
-    --accent-color: #2563eb;
-    --accent-hover: #1d4ed8;
-    --bg-color: #f8fafc;
-    --text-dark: #334155;
-    --white: #ffffff;
+  --primary-color: #0f172a;
+  --accent-color: #2563eb;
+  --accent-hover: #1d4ed8;
+  --bg-color: #f8fafc;
+  --text-dark: #334155;
+  --white: #ffffff;
 
-    --radius-std: 8px;
-    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --primary: #2563eb;
-    --primary-dark: #1e40af;
+  --radius-std: 8px;
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
 }
 
 /* --- BASE --- */
 body {
-    background-color: var(--bg-color);
-    color: var(--text-dark);
-    font-family: var(--font-stack);
-    -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  font-family: var(--font-stack);
+  -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4 {
-    color: var(--primary-color);
-    font-weight: 700;
-    letter-spacing: -0.5px;
+h1,
+h2,
+h3,
+h4 {
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
-/* --- BOUTONS (Style SaaS Moderne) --- */
+/* --- BUTTONS (Modern SaaS Style) --- */
 .btn {
-    border-radius: 6px !important;
-    font-weight: 600;
-    padding: 10px 20px;
-    letter-spacing: 0.3px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease-in-out;
+  border-radius: 6px !important;
+  font-weight: 600;
+  padding: 10px 20px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
 }
 
-/* Nouveau Projet Button */
+/* New Project Button */
 .btn-new-project {
-    background-color: #BF5AAC !important;
-    border-color: #BF5AAC !important;
-    color: white !important;
-    font-weight: 600;
-    transition: all 0.3s ease;
+  background-color: #BF5AAC !important;
+  border-color: #BF5AAC !important;
+  color: white !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .btn-new-project:hover {
-    filter: brightness(0.9);
-    transform: translateY(-1px);
+  filter: brightness(0.9);
+  transform: translateY(-1px);
 }
 
-/* --- CARTES (Magic Card / Uiverse-inspired) --- */
+/* --- CARDS (Magic Card / Uiverse-inspired) --- */
 .magic-card {
   --bg-start: #113931;
   --bg-end: #acb6e5;
@@ -72,14 +75,14 @@ h1, h2, h3, h4 {
   transition: transform 0.25s ease;
   cursor: pointer;
 
-  /* aspect ratio (si supporté) pour un rendu harmonieux */
+  /* aspect ratio (if supported) for harmonious rendering */
   aspect-ratio: 3 / 2;
   display: block;
-  box-shadow: 0 10px 30px rgba(16,24,40,0.08);
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
   border: none !important;
 }
 
-/* arrière-plans inclinés */
+/* tilted backgrounds */
 .magic-card::before,
 .magic-card::after {
   content: "";
@@ -100,20 +103,22 @@ h1, h2, h3, h4 {
   transform: rotate(-2deg) translateY(0);
 }
 
-/* Hover : légère rotation + déplacement des calques */
+/* Hover: slight rotation + layer displacement */
 .magic-card:hover {
   transform: rotate(3deg) translateY(-6px);
 }
+
 .magic-card:hover::before {
   transform: rotate(6deg) translateY(-6px);
   opacity: 0.95;
 }
+
 .magic-card:hover::after {
   transform: rotate(-6deg) translateY(6px);
   opacity: 0.95;
 }
 
-/* Contenu interne — carte blanche pour lisibilité */
+/* Internal content — white card for readability */
 .magic-card .card-info {
   --color: #292b2c;
   background: #ffffff;
@@ -130,18 +135,18 @@ h1, h2, h3, h4 {
   gap: 0.75rem;
 }
 
-/* (Optionnel) zone image carrée */
+/* (Optional) square image zone */
 .magic-card .card-image {
   width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: 0.6rem;
   background-color: #eee;
-  border: 3px solid rgba(0,0,0,0.04);
-  box-shadow: 0 8px 20px rgba(2,6,23,0.04);
+  border: 3px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.04);
   overflow: hidden;
 }
 
-/* Titres */
+/* Titles */
 .magic-card .title,
 .magic-card .card-title {
   font-weight: 700;
@@ -152,67 +157,75 @@ h1, h2, h3, h4 {
 
 /* Progress Bar Customization */
 .progress {
-    background-color: #f1f5f9;
-    border-radius: 10px;
-    overflow: hidden;
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .progress-bar {
-    background-color: var(--primary);
-    background-image: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
-    transition: width 0.6s ease;
+  background-color: var(--primary);
+  background-image: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+  transition: width 0.6s ease;
 }
 
 .progress-bar.bg-success {
-    background-image: linear-gradient(90deg, #34d399 0%, #10b981 100%) !important;
+  background-image: linear-gradient(90deg, #34d399 0%, #10b981 100%) !important;
 }
 
 /* New Project Form Area */
 .card-body.bg-light {
-    background-color: #ffffff !important;
-    border: 2px dashed #cbd5e1 !important;
-    box-shadow: none !important;
+  background-color: #ffffff !important;
+  border: 2px dashed #cbd5e1 !important;
+  box-shadow: none !important;
 }
 
-/* Boutons outline */
+/* Outline buttons */
 .btn-outline-primary {
-    border-color: var(--primary);
-    color: var(--primary);
-    border-radius: 50px;
-    font-weight: 600;
+  border-color: var(--primary);
+  color: var(--primary);
+  border-radius: 50px;
+  font-weight: 600;
 }
 
 .btn-outline-primary:hover {
-    background-color: var(--primary);
-    color: white;
+  background-color: var(--primary);
+  color: white;
 }
 
 /* Responsive adjustments */
 @media (max-width: 576px) {
-  .magic-card { aspect-ratio: auto; min-height: 220px; }
-  .magic-card .card-image { aspect-ratio: 16/9; }
+  .magic-card {
+    aspect-ratio: auto;
+    min-height: 220px;
+  }
+
+  .magic-card .card-image {
+    aspect-ratio: 16/9;
+  }
 }
-.pr{
-    margin-bottom: 1.5cm !important;
-    margin-left: 11cm !important;
-    margin-top: 0.5cm !important;
-    color: #000000 !important;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+.pr {
+  margin-bottom: 1.5cm !important;
+  margin-left: 11cm !important;
+  margin-top: 0.5cm !important;
+  color: #000000 !important;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 .btn-new-project {
-    margin-top: -1cm !important;
+  margin-top: -1cm !important;
 
-   
+
 }
 
-/* Styles spécifiques à la barre de recherche dans la liste de projets */
+/* Specific styles for the search bar in the project list */
 .search-wrapper .input-group {
   max-width: 420px;
-  box-shadow: 0 2px 8px rgba(16,24,40,0.04);
+  box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
   border-radius: 0.6rem;
   overflow: hidden;
   margin-right: 6cm;
-  
+
   margin-bottom: 1cm;
 }
 
@@ -231,5 +244,7 @@ h1, h2, h3, h4 {
 
 /* Responsive */
 @media (max-width: 576px) {
-  .search-wrapper .input-group { max-width: 100%; }
+  .search-wrapper .input-group {
+    max-width: 100%;
+  }
 }

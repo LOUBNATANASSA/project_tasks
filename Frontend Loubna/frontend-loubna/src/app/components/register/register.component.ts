@@ -34,22 +34,22 @@ export class RegisterComponent {
                 this.isSuccessful = true;
                 this.isSignUpFailed = false;
 
-                // Connexion automatique après inscription
+                // Automatic login after registration
                 this.authService.login(email, password).subscribe({
                     next: (loginData) => {
-                        // Ajouter le nom d'utilisateur aux données de connexion
+                        // Add the username to login data
                         const userData = { ...loginData, name: username };
                         this.authService.saveUser(userData);
                         this.router.navigate(['/projects']);
                     },
                     error: (err) => {
-                        // Si la connexion auto échoue, rediriger vers login
+                        // If auto login fails, redirect to login
                         this.router.navigate(['/login']);
                     }
                 });
             },
             error: (err) => {
-                this.errorMessage = err.error.message || 'Erreur lors de l\'inscription';
+                this.errorMessage = err.error.message || 'Error during registration';
                 this.isSignUpFailed = true;
             }
         });

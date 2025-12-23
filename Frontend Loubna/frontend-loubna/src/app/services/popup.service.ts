@@ -38,14 +38,14 @@ export class PopupService {
         this.popupSubject.next(null);
     }
 
-    // Méthodes utilitaires
+    // Utility methods
     confirm(title: string, message: string): Observable<PopupResult> {
         return this.open({
             title,
             message,
             type: 'confirm',
-            confirmText: 'Confirmer',
-            cancelText: 'Annuler'
+            confirmText: 'Confirm',
+            cancelText: 'Cancel'
         });
     }
 

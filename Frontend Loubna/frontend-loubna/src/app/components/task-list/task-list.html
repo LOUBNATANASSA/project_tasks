@@ -1,24 +1,38 @@
 <div class="container mt-5">
-  <!-- Utilisation de projectTitle au lieu de projectId -->
-  <h3>Gestion des tâches : <span class="text-primary">{{ projectTitle || 'Chargement...' }}</span></h3>
+  <!-- Using projectTitle instead of projectId -->
+  <h3>Task Management: <span class="text-primary">{{ projectTitle || 'Loading...' }}</span></h3>
 
   <div class="input-group mb-4 mt-4">
-    <input type="text" class="form-control" placeholder="Nouvelle tâche..." [(ngModel)]="newTaskTitle">
-    <button class="btn btn-primary" (click)="addTask()">Ajouter</button>
+    <input type="text" class="form-control" placeholder="Quick add task..." [(ngModel)]="newTaskTitle">
+    <button class="btn btn-primary" (click)="addTask()">Quick Add</button>
+    <a [routerLink]="['/projects', projectId, 'tasks', 'create']" class="btn btn-success ms-2">Create Detailed Task</a>
   </div>
 
-  <!-- ... reste de la liste ... -->
+  <!-- ... rest of the list ... -->
   <ul class="list-group">
     <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let task of tasks">
-      <div *ngIf="editingTaskId !== task.id" class="d-flex align-items-center flex-grow-1">
-        <input type="checkbox" class="form-check-input me-2" [checked]="task.isCompleted" (change)="toggleTask(task.id)">
-        <span [class.text-decoration-line-through]="task.isCompleted">{{ task.title }}</span>
+      <div *ngIf="editingTaskId !== task.id" class="d-flex align-items-start flex-grow-1">
+        <input type="checkbox" class="form-check-input me-3 mt-1" [checked]="task.isCompleted"
+          (change)="toggleTask(task.id)">
+        <div class="d-flex flex-column">
+          <span [class.text-decoration-line-through]="task.isCompleted" class="fw-bold">{{ task.title }}</span>
+          <p *ngIf="task.description" class="mb-1 text-muted small" style="white-space: pre-wrap;">{{ task.description
+            }}</p>
+          <small *ngIf="task.dueDate" class="text-secondary">
+            <i class="bi bi-calendar-event"></i> Due: {{ task.dueDate | date:'mediumDate' }}
+          </small>
+        </div>
       </div>
 
-      <div *ngIf="editingTaskId === task.id" class="d-flex align-items-center flex-grow-1">
-        <input type="text" class="form-control form-control-sm me-2" [(ngModel)]="editingTaskTitle">
-        <button class="btn btn-success btn-sm me-1" (click)="saveEdit(task)">modifier</button>
-        <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">cancel</button>
+      <div *ngIf="editingTaskId === task.id" class="d-flex flex-column flex-grow-1 p-2 border rounded bg-light">
+        <input type="text" class="form-control mb-2" [(ngModel)]="editingTaskTitle" placeholder="Task Title">
+        <textarea class="form-control mb-2" [(ngModel)]="editingTaskDescription" placeholder="Description"
+          rows="2"></textarea>
+        <input type="date" class="form-control mb-2" [(ngModel)]="editingTaskDueDate">
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-success btn-sm me-2" (click)="saveEdit(task)">Save</button>
+          <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+        </div>
       </div>
 
       <div *ngIf="editingTaskId !== task.id">
@@ -29,8 +43,8 @@
   </ul>
 
   <div *ngIf="tasks.length === 0" class="alert alert-info mt-3">
-    Aucune tâche.
+    No tasks.
   </div>
 
-  <a routerLink="/projects" class="btn btn-secondary mt-4">← Retour aux projets</a>
+  <a routerLink="/projects" class="btn btn-secondary mt-4">← Back to projects</a>
 </div>
