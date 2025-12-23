@@ -33,15 +33,20 @@ export class ProjectService {
     }, { headers: this.getHeaders() });
   }
 
+  updateProject(id: number, title: string, description: string): Observable<any> {
+    return this.http.put(`${API_URL}/${id}`, {
+      title,
+      description
+    }, { headers: this.getHeaders() });
+  }
 
- deleteProject(id: number): Observable<any> {
-  return this.http.delete(`${API_URL}/${id}`, { headers: this.getHeaders() });
-}
+  deleteProject(id: number): Observable<any> {
+    return this.http.delete(`${API_URL}/${id}`, { headers: this.getHeaders() });
+  }
 
-
-// ... à l'intérieur de la classe ProjectService ...
-getProjectById(id: number): Observable<any> {
-  return this.http.get(`${API_URL}/${id}`, { headers: this.getHeaders() });
-}
+  // ... à l'intérieur de la classe ProjectService ...
+  getProjectById(id: number): Observable<any> {
+    return this.http.get(`${API_URL}/${id}`, { headers: this.getHeaders() });
+  }
 
 }

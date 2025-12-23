@@ -14,11 +14,11 @@
             [(ngModel)]="searchTerm"
             aria-label="Search projects"
           />
-         
         </div>
       </div>
 
-      <button class="btn btn-new-project" (click)="showForm = !showForm">
+      <!-- Utiliser la méthode toggleForm() au lieu d'expressions complexes dans le template -->
+      <button class="btn btn-new-project" (click)="toggleForm()">
         {{ showForm ? 'Cancel' : '+ New Project' }}
       </button>
     </div>
@@ -29,7 +29,7 @@
   </div>
 
   <div *ngIf="showForm" class="card card-body bg-light mb-4 shadow-sm">
-    <h4>New Project</h4>
+    <h4>{{ editingId ? 'Edit Project' : 'New Project' }}</h4>
     <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="mb-3">
         <label>Title <span class="text-danger">*</span></label>
@@ -47,7 +47,10 @@
           Description is required
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Save</button>
+      <div class="d-flex align-items-center">
+        <button type="submit" class="btn btn-primary" [disabled]="f.invalid">{{ editingId ? 'Update' : 'Save' }}</button>
+        <button type="button" *ngIf="editingId" (click)="cancelEdit()" class="btn btn-secondary ms-2">Cancel</button>
+      </div>
     </form>
   </div>
 
@@ -70,6 +73,9 @@
               <button class="btn btn-outline-primary btn-sm flex-grow-1"
                 [routerLink]="['/projects', project.id, 'tasks']">
                 View Tasks
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" (click)="editProject(project)">
+                Edit
               </button>
               <button class="btn btn-outline-danger btn-sm" (click)="deleteProject(project.id)">
                 Delete
