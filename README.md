@@ -64,10 +64,6 @@ This project follows a **modern, scalable, and test-driven architecture**, ensur
 * **Language:** **TypeScript 5.9.3**
 * **Zone Management:** `zone.js 0.16.0`
 
-### Frontend Testing
-* Unit Testing with **Vitest 4**
-* Component and service isolation
-
 ---
 
 ## Key Features
@@ -78,7 +74,7 @@ This project follows a **modern, scalable, and test-driven architecture**, ensur
 * Protected routes using Angular **Auth Guards**
 
 ### Project Dashboard
-* Create and manage IT projects
+* Create and manage projects
 * Dynamic progress tracking (0% → 100%)
 * Real-time overview of all projects
 
